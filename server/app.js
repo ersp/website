@@ -8,7 +8,7 @@ const auth = require('./google');
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
-const MONGO_URL = process.env.MONGO_URL_TEST;
+const MONGO_URL = dev ? process.env.MONGO_URL_DEV : process.env.MONGO_URL_PROD;
 
 mongoose.connect(MONGO_URL);
 
