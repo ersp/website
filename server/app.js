@@ -1,19 +1,21 @@
 const express = require('express');
 const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
+const bodyParser = require('body-parser');
 const next = require('next');
 const mongoose = require('mongoose');
 const auth = require('./google');
+const recipes = require('./recipes');
 
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
-const MONGO_URL = dev ? process.env.MONGO_URL_DEV : process.env.MONGO_URL_PROD;
+const MONGO_URL = process.env.MONGO_URL_TEST;
 
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://erikspeece.com';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://mydomain.com';
 
 const sessionSecret = process.env.SESSION_SECRET;
 
@@ -43,7 +45,12 @@ app.prepare().then(() => {
 
   server.use(session(sess));
 
+  server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(bodyParser.json());
+
   auth({ server, ROOT_URL });
+
+  recipes({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
 

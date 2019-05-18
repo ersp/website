@@ -34,5 +34,6 @@ module.exports = {
         extensions: ['.js'],
       },
     ],
+    'linebreak-style': ["error", "windows"]
   },
 };

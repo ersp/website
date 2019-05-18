@@ -18,10 +18,7 @@ class MyDocument extends Document {
             rel="shortcut icon"
             href="https://storage.googleapis.com/builderbook/favicon32.png"
           />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
-          />
+          <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
             rel="stylesheet"
@@ -63,11 +60,12 @@ class MyDocument extends Document {
         <body
           style={{
             font: '16px Muli',
+            fontFamily: 'Roboto, sans-serif',
             color: '#222',
             margin: '0px auto',
             fontWeight: '300',
             lineHeight: '1.5em',
-            backgroundColor: '#F7F9FC',
+            backgroundColor: '#0e83cd'
           }}
         >
           <Main />
